@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Time Clock</title>
+    <style>
+      body {
+        font-family: monospace;
+        font-size: 24px;
+        text-align: center;
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock"></div>
+
+    <script>
+      function updateClock() {
+        // Get current time
+        var currentTime = new Date();
+
+        // Format hours, minutes, and seconds with leading zeros
+        var hours = currentTime.getHours().toString().padStart(2, "0");
+        var minutes = currentTime.getMinutes().toString().padStart(2, "0");
+        var seconds = currentTime.getSeconds().toString().padStart(2, "0");
+
+        // Format time in HH:MM:SS format
+        var time24Format = hours + ":" + minutes + ":" + seconds;
+
+        // Format time in HH:MM:SS AM/PM format
+        var ampm = hours >= 12 ? "PM" : "AM";
+        var hours12 = (hours % 12 || 12).toString().padStart(2, "0");
+        var time12Format = hours12 + ":" + minutes + ":" + seconds + " " + ampm;
+
+        // Update the clock display
+        document.getElementById("clock").innerHTML =
+          "24-Hour Format: " +
+          time24Format +
+          "<br>" +
+          "12-Hour Format: " +
+          time12Format;
+      }
+
+      // Update the clock immediately
+      updateClock();
+
+      // Update the clock every second
+      setInterval(updateClock, 1000);
+    </script>
+  </body>
+</html>
